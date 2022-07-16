@@ -1,0 +1,11 @@
+head = {"Host": "www.czce.com.cn",
+"Connection": "keep-alive",
+"Pragma": "no-cache",
+"Cache-Control": "no-cache",
+"Upgrade-Insecure-Requests": "1",
+"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
+"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+"Referer": "http://www.czce.com.cn/cn/jysj/mrhq/H770301index_1.htm",
+"Accept-Encoding": "gzip, deflate",
+"Accept-Language": "zh-CN,zh;q=0.9",
+"Cookie": "c33AO066xuuCS=5C8D5iy1dNylej3ZrzsL59PIRCaTthpeR4m.yi2PhyhridulGeJtizFNOtBMZVDOYDmj5ZzjVr5pLVE2mExhrIG; UM_distinctid=18001b0e6969f4-015ca1e310378f-3e604809-384000-18001b0e697968; CNZZDATA1264458526=2003812552-1649289433-http%253A%252F%252Fwww.czce.com.cn%252F%7C1649300244; c33AO066xuuCT=539yYHbxiYn9qqqDqqI0EHquzsEFm84_tNTt8H3JtT1hxKNYQKGZZ0D8AHrGTWPjGPVdtBy53YeBdWiltBfmYdDnJXIJYYdEHTQATLji30.EtBxGcgJAjns2M3LiBaUmdNyyzGkfajVR0oM1geFyr3IUU6S4ZOn57n9Z6q5zDgcyIYUskkd9h3lxuwwxvh5KRsGb8moRJIwlZ1e3swa2ugQ7yU2dTwV.vPO5yFNQo92m6rHTugfKHEXbe84el4T5IzF3wy9HY0fAx4Sp_R_0i6vJSpZJlaVosSl.oJKxqTunA"}
