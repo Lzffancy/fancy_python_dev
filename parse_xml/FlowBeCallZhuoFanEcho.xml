@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    被调xml回文测试
+    command=FlowBeCallZhuoFanEcho&words=lzffffff
+-->
+<FLOW name="FlowBeCallZhuoFanEcho" demo="" author="zhuofan">
+    <REQUEST name="request">
+        <INPUT name="command" value="" aliases="commpand" chiname="命令字" demo="FlowBeCallZhuoFanEcho"/>
+        <INPUT name="words" value="" aliases="string" chiname="字符" demo="hello"/>
+
+        <SCRIPT name="input_script">
+            <![CDATA[
+            --5000入参
+            o_g_words= i_args["request.words"]
+            if o_g_words== nil then
+               o_g_words = ""
+            end
+            o_g_words =string.format("%s becallxml",o_g_words)
+            o_g_err_msg = "0"
+            alog("FlowBeCallZhuoFanEcho!!! doing1 ...")
+            
+
+            --使用域测试
+            o_g_shop = {["a"]=1}
+            --o_g_shop = shop
+            alog(type(o_g_shop))
+            for k,v in pairs(o_g_shop) do alog(k) alog(v) end
+
+
+
+            --
+            o_g_content = '{"ItemInfo":null}'
+            mail = f_json_decode(o_g_content)
+            alog(mail)
+            if mail["ItemInfo"] == nil then
+                alog("不需要这个NULL")
+            else
+               alog("错过")
+            end
+
+
+            mail_str = tostring(mail["ItemInfo"])
+            alog(mail_str)
+            if mail_str == "userdata: (nil)" then
+             alog("不需要这个")
+            end
+            
+
+
+            mail2 = {["0"]=nil}
+            for i = 0 ,#mail2 do
+                if mail2[i] == nil then
+                alog("mail2 不要这个")
+                end
+            end
+
+
+
+
+           --[[ for i = 1 ,#mail do
+            mail[i]["ItemInfo"] = tostring(mail[i]["ItemInfo"])  
+                for k,v in pairs(mail[i]) do
+                    alog(string.format("%s ；%s",k,v))
+                end
+
+                if mail[i]["ItemInfo"] ~= "userdata: (nil)" then
+                    alog("不需要nil")
+                    for k,v in pairs(mail[i]) do
+                        alog(string.format("%s ；%s",k,v))
+                    end
+                end
+            end ]]--
+
+
+            --如何模拟休眠？？
+            --alog("flowsleep! start----")
+            --os.execute("sleep 5")
+            --alog("flowsleep! end----")
+
+            alog("FlowBeCallZhuoFanEcho doing2 ...")
+            --return "1" --该位置会直接返回到response 标签
+            ]]>
+        </SCRIPT>
+    </REQUEST>
+
+    <PROCESS name="process">
+        <STEP name="step_1">
+            <SCRIPT name="step_1_script">
+                <![CDATA[
+                --没有调用任何so,脚本不会执行
+                alog("没有调用任何so,脚本不会执行")
+                return "1"
+                ]]>
+            </SCRIPT>
+        </STEP>
+
+    </PROCESS>
+    <RESPONSE name="response" format="cgi">
+        <SCRIPT name="output_script">
+            <![CDATA[
+            alog("return 1 后执行")
+            --alog(o_g_shop)
+            alog(type(o_g_shop))
+            for k,v in pairs(o_g_shop) do alog(k) alog(v) end
+            ]]>
+        </SCRIPT>
+        <OUTPUT name="result" value="FLOW.o_g_err_msg" chiname="" demo=""/>
+        <OUTPUT name="err_msg" value="FLOW.o_g_err_msg" chiname="" demo=""/>
+        <OUTPUT name="words" value="FLOW.o_g_words" chiname="" demo=""/>
+    </RESPONSE>
+
+
+</FLOW>

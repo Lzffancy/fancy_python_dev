@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 回文测试demo.调用xml so
+    command=FlowZhuoFanEcho&words=hellloooooooooooooo
+    command=FlowZhuoFanEcho&string=hellloooooooooooooo
+
+-->
+<FLOW name="FlowZhuoFanEcho" demo="" author="zhuofan">
+    <REQUEST name="request">
+        <!-- value 可以给默认值，nickname 对入参重映射,aliases别名 (解释用），chiame 参数解释，demo 用例 -->
+        <INPUT name="command" value=""  chiname="命令字" demo=""/>
+        <INPUT name="words" value=""  chiname="字符" demo=""/>
+
+        <SCRIPT name="input_script"><![CDATA[
+            --5000入参
+            o_g_words= i_args["request.words"]
+            if o_g_words == nil then
+                alog("入参o_g_words=nil")
+                o_g_words = ""
+            end
+            info = string.format("入参%s:",o_g_words)
+            alog(info)
+            o_g_err_msg = "0"
+            alog("FlowZhuoFanEcho!!! doing ...")
+
+            --需要注意，使用o_g_conf 开头会自动适应 cs  和 kf  以及线上环境
+            o_g_conf_test_input="what are you doing???"
+            ]]>
+        </SCRIPT>
+    </REQUEST>
+
+    <PROCESS name="process">
+        <STEP name="step_1">
+                <SOINFO so="CmdZhuoFanEcho" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
+                    <INPUT name="words" value="FLOW.o_g_words" demo=""/>
+                </SOINFO>
+                <SOINFO so="CmdZhuoFanEcho111" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
+                    <INPUT name="words" value="FLOW.o_g_words" demo=""/>
+                </SOINFO>
+                <SCRIPT name="step_1_script">
+                    <![CDATA[
+                        alog(i_args)
+                        if i_args["sozhuofanecho.result"] == "0" then
+                            o_g_words_so=i_args["sozhuofanecho.words"]
+                        else
+                            o_g_err_msg = ' so code or key error '
+                        end
+
+                        alog("CmdZhuoFanEcho doing...")
+                    ]]>
+                </SCRIPT>
+        </STEP>
+        <STEP name="step_2">
+            <SOINFO so="FlowBeCallZhuoFanEcho" name="xmlzhuofanecho" port="5000" timeout="3">
+                <INPUT name="words" value="FLOW.o_g_words"/>
+                <INPUT name="test_input" value="FLOW.o_g_conf_test_input"/>
+            </SOINFO>
+            <SCRIPT name="step_2_script">
+                <![CDATA[
+                --超时后，返回的都是nil
+                --["xmlzhuofanecho._ERRCODE"] = "-21005",
+                -- 超时了，有返回的
+                -- 出参和入参一致使用相同字段有覆盖风险！！！！
+                if i_args["xmlzhuofanecho.result"] == '0' then
+                    o_g_words_xml=i_args["xmlzhuofanecho.words"]
+                else
+                    o_g_err_msg = 'be call code or key error'
+                end
+                alog(i_args)
+                alog("FlowBeCalledZFEcho doing ...")
+
+                o_g_test_flag="0"
+            ]]>
+
+            </SCRIPT>
+        </STEP>
+
+        <STEP name="step_3">
+            <SOINFO so="FlowBeCallZhuoFanEcho" name="xmlzhuofanecho3" port="5000" timeout="3" ifkey ="FLOW.o_g_test_flag" ifvalue ="0">
+                <INPUT name="words" value="FLOW.o_g_words"/>
+                <INPUT name="test_input" value="FLOW.o_g_conf_test_input"/>
+            </SOINFO>
+
+
+            <SCRIPT name="step_3_script">
+                <![CDATA[
+                alog("FlowBeCallZhuoFanEcho 返回")
+                alog(i_args["xmlzhuofanecho3.words"])
+                o_g_test = "123"
+            ]]>
+
+            </SCRIPT>
+        </STEP>
+
+
+    </PROCESS>
+    <RESPONSE name="response" format="cgi">
+        <SCRIPT name="output_script">
+            <![CDATA[
+
+        ]]>
+        </SCRIPT>
+        <OUTPUT name="words" value="FLOW.o_g_words" chiname="" demo=""/>
+        <OUTPUT name="words_so" value="FLOW.o_g_words_so" chiname="" demo=""/>
+        <OUTPUT name="words_xml_to_xml" value="FLOW.o_g_words_xml" chiname="" demo=""/>
+        <OUTPUT name="error_msg" value="FLOW.o_g_err_msg" chiname="" demo=""/>
+    </RESPONSE>
+
+
+</FLOW>
