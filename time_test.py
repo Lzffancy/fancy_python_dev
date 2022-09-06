@@ -33,8 +33,8 @@ print(time.strftime("%A", a))
 print(time.strftime("%w", a))
 
 if __name__ == '__main__':
-    sdt = "2022-08-05 00:14:00"
-    edt = "2022-08-05 00:14:05"
+    sdt = "2022-08-08 00:14:00"
+    edt = "2022-08-08 00:14:05"
 
     print(sdt[-5:], "倒序")
     print(time.mktime(time.strptime(sdt, "%Y-%m-%d %H:%M:%S")) * 1000)

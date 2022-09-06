@@ -53,4 +53,4 @@ def make_5mins_interval():
     print(time.strftime("%Y-%m-%d %H:%M", time.localtime(now_time_stamp)))
     return last_time_stamp, now_time_stamp
 
-make_5mins_interval()
+make_5mins_interval().pr

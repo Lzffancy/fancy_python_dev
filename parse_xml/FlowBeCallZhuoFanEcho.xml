@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
     被调xml回文测试
     command=FlowBeCallZhuoFanEcho&words=lzffffff
 -->
@@ -18,7 +18,7 @@
             o_g_words =string.format("%s becallxml",o_g_words)
             o_g_err_msg = "0"
             alog("FlowBeCallZhuoFanEcho!!! doing1 ...")
-            
+
 
             --使用域测试
             o_g_shop = {["a"]=1}
@@ -44,7 +44,7 @@
             if mail_str == "userdata: (nil)" then
              alog("不需要这个")
             end
-            
+
 
 
             mail2 = {["0"]=nil}
@@ -58,7 +58,7 @@
 
 
            --[[ for i = 1 ,#mail do
-            mail[i]["ItemInfo"] = tostring(mail[i]["ItemInfo"])  
+            mail[i]["ItemInfo"] = tostring(mail[i]["ItemInfo"])
                 for k,v in pairs(mail[i]) do
                     alog(string.format("%s ；%s",k,v))
                 end
@@ -85,6 +85,9 @@
 
     <PROCESS name="process">
         <STEP name="step_1">
+               <SOINFO so="CmdZhuoFanEchoinbecall" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
+                    <INPUT name="words" value="FLOW.o_g_words" demo=""/>
+                </SOINFO>
             <SCRIPT name="step_1_script">
                 <![CDATA[
                 --没有调用任何so,脚本不会执行

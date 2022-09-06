@@ -31,10 +31,10 @@
 
     <PROCESS name="process">
         <STEP name="step_1">
-                <SOINFO so="CmdZhuoFanEcho" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
+                <SOINFO so="CmdZhuoFanEcho111" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
                     <INPUT name="words" value="FLOW.o_g_words" demo=""/>
                 </SOINFO>
-                <SOINFO so="CmdZhuoFanEcho111" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
+                <SOINFO so="CmdZhuoFanEcho222" name="sozhuofanecho" ip ="9.138.64.37" port = "7000" >
                     <INPUT name="words" value="FLOW.o_g_words" demo=""/>
                 </SOINFO>
                 <SCRIPT name="step_1_script">
@@ -75,22 +75,22 @@
             </SCRIPT>
         </STEP>
 
-        <STEP name="step_3">
-            <SOINFO so="FlowBeCallZhuoFanEcho" name="xmlzhuofanecho3" port="5000" timeout="3" ifkey ="FLOW.o_g_test_flag" ifvalue ="0">
-                <INPUT name="words" value="FLOW.o_g_words"/>
-                <INPUT name="test_input" value="FLOW.o_g_conf_test_input"/>
-            </SOINFO>
+<!--        <STEP name="step_3">-->
+<!--            <SOINFO so="FlowBeCallZhuoFanEcho" name="xmlzhuofanecho3" port="5000" timeout="3" ifkey ="FLOW.o_g_test_flag" ifvalue ="0">-->
+<!--                <INPUT name="words" value="FLOW.o_g_words"/>-->
+<!--                <INPUT name="test_input" value="FLOW.o_g_conf_test_input"/>-->
+<!--            </SOINFO>-->
 
 
-            <SCRIPT name="step_3_script">
-                <![CDATA[
-                alog("FlowBeCallZhuoFanEcho 返回")
-                alog(i_args["xmlzhuofanecho3.words"])
-                o_g_test = "123"
-            ]]>
+<!--            <SCRIPT name="step_3_script">-->
+<!--                <![CDATA[-->
+<!--                alog("FlowBeCallZhuoFanEcho 返回")-->
+<!--                alog(i_args["xmlzhuofanecho3.words"])-->
+<!--                o_g_test = "123"-->
+<!--            ]]>-->
 
-            </SCRIPT>
-        </STEP>
+<!--            </SCRIPT>-->
+<!--        </STEP>-->
 
 
     </PROCESS>
